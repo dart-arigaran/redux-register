@@ -12,10 +12,12 @@ import Update_Employee from "./components/Pages/Update_Employee";
 import View from "./components/Pages/View";
 import Model from "./components/Pages/Model";
 import Footer from "./components/Footer";
+import { Provider } from "react-redux";
+import store from "./Redux/Store/store";
 
 function App() {
   return (
-    <>
+    <Provider store={store}>
       <div className="App">
         <Router>
           <Dashboard />
@@ -36,7 +38,7 @@ function App() {
           <Footer />
         </Router>
       </div>
-    </>
+    </Provider>
   );
 }
 

@@ -5,10 +5,23 @@ import { API_KEY_REGISTER } from "../base";
 
 function Register() {
   const navigate = useNavigate();
+  // const [user, setUser] = useState({
+  //   name: "",
+  //   email: "",
+  //   password: "",
+  // });
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-
+  // const inputHandler = (event) => {
+  //   const { name, value } = event.target;
+  //   setUser((prevItem) => {
+  //     return {
+  //       ...prevItem,
+  //       [name]: value,
+  //     };
+  //   });
+  // };
   useEffect(() => {
     if (
       localStorage.getItem("token") == "" &&
@@ -83,6 +96,7 @@ function Register() {
               }}
             />
           </div>
+
           <div class="col-auto">
             <span class="form-text">
               We'll never share your email with anyone else.
@@ -96,14 +110,18 @@ function Register() {
               Password
             </label>
           </div>
+
           <div class="col-auto">
             <input
               type="password"
               class="form-control"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
           </div>
+
           <div class="col-auto">
             <span id="passwordHelpInline" class="form-text">
               Must be 8-20 characters long.
@@ -113,7 +131,7 @@ function Register() {
         <br />
         <button className="btn btn-success  mb-1">Create Account</button>
         <p className="text-center">
-          Have already an account <Link to="/">Login here</Link>
+          Have already an account <Link to="/login">Login here</Link>
         </p>
       </form>
     </div>

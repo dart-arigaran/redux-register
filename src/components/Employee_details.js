@@ -4,8 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { API_KEY_ALL_EMPLOYEE } from "../base";
 import { Delete_Employee } from "./Pages/Delete-Employee";
 import Model from "./Pages/Model";
-// import { Edit_Update } from "./Pages/Update_Employee";
-// import { View } from "./Pages/View";
 
 function Employee_details() {
   const [user, setUser] = useState([]);
@@ -77,8 +75,6 @@ function Employee_details() {
               <td>{data.date_of_relieving}</td>
               <td>
                 <div class="d-grid gap-2 d-md-block">
-                  {/* <button onClick={View()}>view</button> */}
-
                   <Link
                     to={`/viewemployee/${data.id}`}
                     className="btn btn-outline-info btn-sm"
@@ -91,26 +87,6 @@ function Employee_details() {
                   >
                     Update
                   </Link>
-
-                  {/* <button
-                    id="bt"
-                    className="btn btn-outline-danger btn-sm ms-1"
-                    onClick={() => {
-                      Edit_Update(data.id);
-                    }}
-                  >
-                    Update
-                  </button> */}
-
-                  {/* <button
-                    id="bt"
-                    className="btn btn-outline-info btn-sm ms-1"
-                    onClick={() => {
-                      Update_Employee_Action(data);
-                    }}
-                  >
-                    Edit
-                  </button> */}
 
                   <button
                     id="bt"

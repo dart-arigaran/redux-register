@@ -1,40 +1,37 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { API_KEY_ADD_EMPLOYEE } from "../../base";
+import { connect, useDispatch } from "react-redux";
+import { addUser } from "../../Redux/Action/UserAction";
 
 function Add_Employee() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [mobile, setMobile] = useState();
   const [designation, setDesignation] = useState();
-  const [joining, setJoining] = useState();
-  const [epf, setEpf] = useState();
-  const [esi, setEsi] = useState();
-  const [photo, setPhoto] = useState();
-  const [leaving, setLeaving] = useState();
+  const [date_of_joining, setJoining] = useState();
+  const [epf_uan, setEpf] = useState();
+  const [esi_number, setEsi] = useState();
+  const [profile_photo, setPhoto] = useState();
+  const [date_of_relieving, setLeaving] = useState();
 
   const addemployee = (e) => {
     e.preventDefault();
-    let payload = {
-      name: name,
-      email: email,
-      mobile: mobile,
-      designation: designation,
-      date_of_joining: joining,
-      epf_uan: epf,
-      esi_number: esi,
-      profile_photo: photo,
-      date_of_relieving: leaving,
+    const userData = {
+      name,
+      email,
+      mobile,
+      designation,
+      date_of_joining,
+      epf_uan,
+      esi_number,
+      profile_photo,
+      date_of_relieving,
     };
-
-    axios
-      .post(API_KEY_ADD_EMPLOYEE, payload, {
-        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
-      })
-      .then((res) => console.log(res.data), navigate("/details"))
-      .catch((err) => console.log(err));
+    console.log(userData);
+    dispatch(addUser(userData));
+    navigate("/details");
   };
 
   return (
@@ -48,6 +45,7 @@ function Add_Employee() {
               type="name"
               placeholder="Enter Your Name"
               class="form-control"
+              value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </div>
@@ -57,6 +55,7 @@ function Add_Employee() {
               type="email"
               placeholder="Enter Your email"
               class="form-control"
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -66,6 +65,7 @@ function Add_Employee() {
               type="number"
               placeholder="Enter Your mobile no"
               class="form-control"
+              value={mobile}
               onChange={(e) => setMobile(e.target.value)}
             />
           </div>
@@ -75,6 +75,7 @@ function Add_Employee() {
               type="text"
               placeholder="Enter Your designation"
               class="form-control"
+              value={designation}
               onChange={(e) => setDesignation(e.target.value)}
             />
           </div>
@@ -84,6 +85,7 @@ function Add_Employee() {
               type="date"
               placeholder="Enter Your joining date"
               class="form-control"
+              value={date_of_joining}
               onChange={(e) => setJoining(e.target.value)}
             />
           </div>
@@ -93,6 +95,7 @@ function Add_Employee() {
               type="number"
               placeholder="Enter Your epf uan"
               class="form-control"
+              value={epf_uan}
               onChange={(e) => setEpf(e.target.value)}
             />
           </div>
@@ -102,6 +105,7 @@ function Add_Employee() {
               type="number"
               placeholder="Enter Your esi no"
               class="form-control"
+              value={esi_number}
               onChange={(e) => setEsi(e.target.value)}
             />
           </div>
@@ -111,6 +115,7 @@ function Add_Employee() {
               type="text"
               placeholder="Enter Your photo"
               class="form-control"
+              value={profile_photo}
               onChange={(e) => setPhoto(e.target.value)}
             />
           </div>
@@ -120,6 +125,7 @@ function Add_Employee() {
               type="date"
               placeholder="Enter Your relieving"
               class="form-control"
+              value={date_of_relieving}
               onChange={(e) => setLeaving(e.target.value)}
             />
           </div>
@@ -136,5 +142,12 @@ function Add_Employee() {
     </div>
   );
 }
+const mapStateToProps = (state) => ({
+  items: state.items,
+});
 
-export default Add_Employee;
+const mapDispatchToProps = {
+  addUser,
+};
+
+export default connect(null, mapDispatchToProps)(Add_Employee);
